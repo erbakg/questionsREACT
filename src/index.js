@@ -4,10 +4,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware} from 'redux'
+import ReduxPromise from 'redux-promise'
+import reducer from './reducers/index'
+
+const createStoreMiddleware = applyMiddleware(ReduxPromise)(createStore)
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+ <Provider store={createStoreMiddleware(reducer)}>
+   <App />
+ </Provider>,
   document.getElementById('root')
 );
 
